@@ -1,8 +1,7 @@
 package com.liuizhen.util.generatorcode.mybatispuls;
 
-import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -12,7 +11,6 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * mybatisPlus生成器
@@ -20,53 +18,47 @@ import java.util.Scanner;
  * @date 20210422
  */
 public class MyBatisPlusCodeGenerator {
-    /**
-     * <p>
-     * 读取控制台内容
-     * </p>
-     */
-    public static String scanner(String tip) {
-        Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
-        System.out.println(help.toString());
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
-                return ipt;
-            }
-        }
-        throw new MybatisPlusException("请输入正确的" + tip + "！");
-    }
-
+    private static final String url="jdbc:mysql://47.105.199.41:3366/shop_goods";
+    private static final String pwd="lzljcn";
+    private static final String userName="shop_goods";
+    private static final String projectPath="H:\\mywork\\mail\\service\\goodsservice";
+    private static   String tableName="brand,category,category_brand,sku,sku_attribute,spu";
+    private static  final  String packName="com.liuzhen.mail.service.goods";
     public static void main(String[] args) {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        final String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("安详的苦丁茶");
+        gc.setAuthor("liuzhen");
         gc.setBaseResultMap(true);
         gc.setBaseColumnList(true);
         // 是否打开输出目录 默认为true
         gc.setOpen(false);
+        gc.setFileOverride(true);
+        gc.setSwagger2(true);
+        gc.setIdType(IdType.AUTO);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/ckf_crm?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl(url);
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("root");
+        dsc.setUsername(userName);
+        dsc.setPassword(pwd);
+
         mpg.setDataSource(dsc);
 
         // 包配置
         final PackageConfig pc = new PackageConfig();
-        // pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.ckf.crm_generator");
+        pc.setParent(packName);
+//        设置包名
+        pc.setMapper("mapper");
+        pc.setController("controller");
+        pc.setEntity("entity");
         mpg.setPackageInfo(pc);
+
 
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
@@ -99,9 +91,17 @@ public class MyBatisPlusCodeGenerator {
 
         // 配置自定义输出模板
         // 指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-        // templateConfig.setEntity("templates/entity2.java");
-        // templateConfig.setService();
-        // templateConfig.setController();
+//         templateConfig.setEntity("templates/entity.java");
+         templateConfig.setService("templates/service.java");
+         templateConfig.setServiceImpl("templates/serviceImpl.java");
+         templateConfig.setController("templates/controller.java");
+//
+//          templateConfig.setService(null);
+//         templateConfig.setServiceImpl(null);
+         templateConfig.setController(null);
+         templateConfig.setMapper(null);
+         templateConfig.setEntity(null);
+         templateConfig.setMapper("templates/mapper.java");
 
         templateConfig.setXml(null);
         mpg.setTemplate(templateConfig);
@@ -114,10 +114,12 @@ public class MyBatisPlusCodeGenerator {
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         // strategy.setSuperControllerClass("com.fame.common.BaseController");
-        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setSuperEntityColumns("id");
+        strategy.setInclude(tableName.split(","));
+
+        //strategy.setSuperEntityColumns("id");
         // strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix("sys");
+
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
