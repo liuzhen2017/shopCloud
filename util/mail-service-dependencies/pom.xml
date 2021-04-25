@@ -22,13 +22,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- myabatis plus-->
-		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.3.2</version>
-		</dependency>
-		 <!--mysql-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -37,17 +30,28 @@
 		<!--redis-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>springboot-starter-data-redis</artifactId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>2.4.5</version>
 		</dependency>
 		<!--Nacos-->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+			<version>2021.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+			<version>2021.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+
+
+
 	</dependencies>
 
 	<build>

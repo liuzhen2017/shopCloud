@@ -38,7 +38,7 @@ public class MyBatisPlusCodeGenerator {
         gc.setOpen(false);
         gc.setFileOverride(true);
         gc.setSwagger2(true);
-        gc.setIdType(IdType.AUTO);
+        gc.setIdType(IdType.ID_WORKER);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置

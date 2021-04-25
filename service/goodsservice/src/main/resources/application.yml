@@ -1,0 +1,51 @@
+service:
+  port: 8081
+spring:
+  application:
+    ame: mail-goods
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.105.199.41:3306/shop_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: shop_goods
+    password: lzjlcn
+  cloud:
+    nacos:
+      config:
+        file_extension: yaml
+        server-addr: 47.105.199.41:88848
+        name: mail-goods
+
+#mybatiss plus
+mybatis-plus:
+  mapper-locations: classpath:mybatis/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.liuzhen.mail.*.entity
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: NOT_EMPTY
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      #logic-delete-value: 0
+      #logic-not-delete-value: 1
+      #表名前缀
+      table-prefix: tb_
+      db-type: mysql
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
