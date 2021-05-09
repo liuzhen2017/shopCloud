@@ -3,7 +3,7 @@ package com.liuzhen.mail.util.tools;
 import lombok.Data;
 
 @Data
-public class Result {
+public class Result<T> {
     private static int successCode=0;
     private static int errorCode=1;
     private int code;

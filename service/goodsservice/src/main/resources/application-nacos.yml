@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        file_extension: yaml
+        server-addr: 106.52.178.180:8848
+        name: mail-goods
+        

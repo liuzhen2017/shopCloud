@@ -23,7 +23,7 @@ public class MyBatisPlusCodeGenerator {
     private static final String userName="shop_goods";
     private static final String projectPath="H:\\mywork\\mail\\service\\goodsservice";
     private static   String tableName="brand,category,category_brand,sku,sku_attribute,spu";
-    private static  final  String packName="com.liuzhen.mail.service.goods";
+    private static  final  String packName="com.liuzhen.mail.goods";
     public static void main(String[] args) {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -96,12 +96,12 @@ public class MyBatisPlusCodeGenerator {
          templateConfig.setServiceImpl("templates/serviceImpl.java");
          templateConfig.setController("templates/controller.java");
 //
-//          templateConfig.setService(null);
-//         templateConfig.setServiceImpl(null);
-         templateConfig.setController(null);
+          templateConfig.setService(null);
+         templateConfig.setServiceImpl(null);
+//         templateConfig.setController(null);
          templateConfig.setMapper(null);
          templateConfig.setEntity(null);
-         templateConfig.setMapper("templates/mapper.java");
+//         templateConfig.setMapper("templates/mapper.java");
 
         templateConfig.setXml(null);
         mpg.setTemplate(templateConfig);
